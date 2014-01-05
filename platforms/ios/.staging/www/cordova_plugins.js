@@ -78,6 +78,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/org.apache.cordova.inappbrowser/www/InAppBrowser.js",
+        "id": "org.apache.cordova.inappbrowser.InAppBrowser",
+        "clobbers": [
+            "window.open"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.file/www/DirectoryEntry.js",
         "id": "org.apache.cordova.file.DirectoryEntry",
         "clobbers": [
@@ -213,6 +220,7 @@ module.exports.metadata =
     "org.apache.cordova.console": "0.2.6",
     "org.apache.cordova.media": "0.2.7",
     "org.apache.cordova.media-capture": "0.2.6",
+    "org.apache.cordova.inappbrowser": "0.3.0",
     "org.apache.cordova.file": "0.2.5"
 }
 // BOTTOM OF METADATA
