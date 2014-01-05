@@ -16,6 +16,24 @@
     <feature name="LocalStorage">
         <param name="ios-package" value="CDVLocalStorage" />
     </feature>
+    <feature name="Console">
+        <param name="ios-package" value="CDVLogger" />
+    </feature>
+    <feature name="File">
+        <param name="ios-package" value="CDVFile" />
+    </feature>
+    <feature name="Geolocation">
+        <param name="ios-package" value="CDVLocation" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="ios-package" value="CDVInAppBrowser" />
+    </feature>
+    <feature name="Media">
+        <param name="ios-package" value="CDVSound" />
+    </feature>
+    <feature name="Capture">
+        <param name="ios-package" value="CDVCapture" />
+    </feature>
     <name>TCPP</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -25,22 +43,4 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <feature name="Console">
-        <param name="ios-package" value="CDVLogger" />
-    </feature>
-    <feature name="Media">
-        <param name="ios-package" value="CDVSound" />
-    </feature>
-    <feature name="File">
-        <param name="ios-package" value="CDVFile" />
-    </feature>
-    <feature name="Capture">
-        <param name="ios-package" value="CDVCapture" />
-    </feature>
-    <feature name="InAppBrowser">
-        <param name="ios-package" value="CDVInAppBrowser" />
-    </feature>
-    <feature name="Geolocation">
-        <param name="ios-package" value="CDVLocation" />
-    </feature>
 </widget>
