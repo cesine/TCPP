@@ -40,6 +40,7 @@
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		F840E1F1165FE0F500CFE078 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = F840E1F0165FE0F500CFE078 /* config.xml */; };
 		6611B34B78964367946E5AC8 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E66B454D0174E42B3E68C0A /* CDVLogger.m */; };
+		5ABB6AB8148046F5BC1D9BA5 /* CDVSound.m in Sources */ = {isa = PBXBuildFile; fileRef = F90CAE448227464FB832FDE3 /* CDVSound.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,8 @@
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "TCPP/config.xml"; sourceTree = "<group>"; };
 		2E66B454D0174E42B3E68C0A /* CDVLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVLogger.m"; path = "org.apache.cordova.console/CDVLogger.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		1B7FBDADA52849429F043C11 /* CDVLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVLogger.h"; path = "org.apache.cordova.console/CDVLogger.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		F90CAE448227464FB832FDE3 /* CDVSound.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVSound.m"; path = "org.apache.cordova.media/CDVSound.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		F69BFE873C0548259EFD99A0 /* CDVSound.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVSound.h"; path = "org.apache.cordova.media/CDVSound.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +226,8 @@
 			children = (
 				2E66B454D0174E42B3E68C0A /* CDVLogger.m */,
 				1B7FBDADA52849429F043C11 /* CDVLogger.h */,
+				F90CAE448227464FB832FDE3 /* CDVSound.m */,
+				F69BFE873C0548259EFD99A0 /* CDVSound.h */,
 			);
 			name = Plugins;
 			path = "TCPP/Plugins";
@@ -409,6 +414,7 @@
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				6611B34B78964367946E5AC8 /* CDVLogger.m in Sources */,
+				5ABB6AB8148046F5BC1D9BA5 /* CDVSound.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
