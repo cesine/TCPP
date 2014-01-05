@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
        Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
@@ -15,23 +17,20 @@
        KIND, either express or implied.  See the License for the
        specific language governing permissions and limitations
        under the License.
- */
+*/
 
-package com.github.ProjetDeRechercheSurLecriture.tcpp;
+var log  = require('./lib/log'),
+    reqs = require('./lib/check_reqs'),
+    args = process.argv;
 
-import android.os.Bundle;
-import org.apache.cordova.*;
-
-public class TCPP extends CordovaActivity 
-{
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        super.init();
-        // Set by <content src="index.html" /> in config.xml
-        super.loadUrl(Config.getStartUrl());
-        //super.loadUrl("file:///android_asset/www/index.html")
-    }
+// Usage support for when args are given
+if(args.length > 2) {
+    log.help();
+} else {
+    reqs.run().done(function() {
+        return log.run();
+    }, function(err) {
+        console.error('ERROR: ' + err);
+        process.exit(2);
+    });
 }
-

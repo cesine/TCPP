@@ -15,23 +15,53 @@
        KIND, either express or implied.  See the License for the
        specific language governing permissions and limitations
        under the License.
+*/
+
+package org.apache.cordova;
+
+import android.view.View;
+
+/*
+ * This can be used by any view, including native views
+ * 
  */
 
-package com.github.ProjetDeRechercheSurLecriture.tcpp;
 
-import android.os.Bundle;
-import org.apache.cordova.*;
-
-public class TCPP extends CordovaActivity 
-{
-    @Override
-    public void onCreate(Bundle savedInstanceState)
+public class ScrollEvent {
+    
+    public int l, t, nl, nt;
+    private View targetView;
+    
+    /*
+     * ScrollEvent constructor
+     * No idea why it uses l and t instead of x and y
+     * 
+     * @param x
+     * @param y
+     * @param nx
+     * @param ny
+     * @param view
+     */
+    
+    ScrollEvent(int nx, int ny, int x, int y, View view)
     {
-        super.onCreate(savedInstanceState);
-        super.init();
-        // Set by <content src="index.html" /> in config.xml
-        super.loadUrl(Config.getStartUrl());
-        //super.loadUrl("file:///android_asset/www/index.html")
+        l = x; y = t; nl = nx; nt = ny;
+        targetView = view;
     }
-}
+    
+    public int dl()
+    {
+        return nl - l;
+    }
+    
+    public int dt()
+    {
+        return nt - t;
+    }
+    
+    public View getTargetView()
+    {
+        return targetView;
+    }
 
+}

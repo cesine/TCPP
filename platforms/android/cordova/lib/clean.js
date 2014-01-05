@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
        Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
@@ -15,23 +17,22 @@
        KIND, either express or implied.  See the License for the
        specific language governing permissions and limitations
        under the License.
+*/
+
+var exec  = require('./exec'),
+    path  = require('path'),
+    ROOT = path.join(__dirname, '..', '..');
+
+/*
+ * Cleans the project using ant
+ * Returns a promise.
  */
-
-package com.github.ProjetDeRechercheSurLecriture.tcpp;
-
-import android.os.Bundle;
-import org.apache.cordova.*;
-
-public class TCPP extends CordovaActivity 
-{
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        super.init();
-        // Set by <content src="index.html" /> in config.xml
-        super.loadUrl(Config.getStartUrl());
-        //super.loadUrl("file:///android_asset/www/index.html")
-    }
+module.exports.run = function() {
+    return exec('ant clean -f "' + path.join(ROOT, 'build.xml') + '"');
 }
 
+module.exports.help = function() {
+    console.log('Usage: ' + path.relative(process.cwd(), process.argv[1]));
+    console.log('Cleans the project directory.');
+    process.exit(0);
+}

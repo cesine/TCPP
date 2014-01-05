@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
        Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
@@ -15,23 +17,27 @@
        KIND, either express or implied.  See the License for the
        specific language governing permissions and limitations
        under the License.
- */
+*/
 
-package com.github.ProjetDeRechercheSurLecriture.tcpp;
+var child_process = require('child_process'),
+    Q       = require('q');
 
-import android.os.Bundle;
-import org.apache.cordova.*;
-
-public class TCPP extends CordovaActivity 
-{
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        super.init();
-        // Set by <content src="index.html" /> in config.xml
-        super.loadUrl(Config.getStartUrl());
-        //super.loadUrl("file:///android_asset/www/index.html")
+// Takes a command and optional current working directory.
+// Returns a promise that either resolves with the stdout, or
+// rejects with an error message and the stderr.
+module.exports = function(cmd, opt_cwd) {
+    var d = Q.defer();
+    console.log('exec: ' + cmd);
+    try {
+        child_process.exec(cmd, {cwd: opt_cwd}, function(err, stdout, stderr) {
+            console.log([cmd, err, stdout, stderr]);
+            if (err) d.reject('Error executing "' + cmd + '": ' + stderr);
+            else d.resolve(stdout);
+        });
+    } catch(e) {
+        console.error('error caught: ' + e);
+        d.reject(e);
     }
+    return d.promise;
 }
 

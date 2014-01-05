@@ -15,23 +15,29 @@
        KIND, either express or implied.  See the License for the
        specific language governing permissions and limitations
        under the License.
- */
+*/
+package org.apache.cordova;
 
-package com.github.ProjetDeRechercheSurLecriture.tcpp;
+import java.util.ArrayList;
+import java.util.List;
 
-import android.os.Bundle;
-import org.apache.cordova.*;
+import org.json.JSONArray;
+import org.json.JSONException;
 
-public class TCPP extends CordovaActivity 
-{
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        super.init();
-        // Set by <content src="index.html" /> in config.xml
-        super.loadUrl(Config.getStartUrl());
-        //super.loadUrl("file:///android_asset/www/index.html")
+@Deprecated // Deprecated in 3.1. To be removed in 4.0.
+public class JSONUtils {
+	public static List<String> toStringList(JSONArray array) throws JSONException {
+        if(array == null) {
+            return null;
+        }
+        else {
+            List<String> list = new ArrayList<String>();
+
+            for (int i = 0; i < array.length(); i++) {
+                list.add(array.get(i).toString());
+            }
+
+            return list;
+        }
     }
 }
-
