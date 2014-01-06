@@ -37,7 +37,7 @@
     <key>CFBundleIconFile</key>
     <string>icon.png</string>
     <key>CFBundleIdentifier</key>
-    <string>com.githubProjetDeRechercheSurLecriture.TCPP</string>
+    <string>com.github.ProjetDeRechercheSurLecriture.tcpp</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
@@ -62,10 +62,10 @@
         <key>CFBundleURLIconFile</key>
         <string></string>
         <key>CFBundleURLName</key>
-        <string>com.githubProjetDeRechercheSurLecriture.TCPP</string>
+        <string>com.github.ProjetDeRechercheSurLecriture.tcpp</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.githubProjetDeRechercheSurLecriture.TCPP</string>
+          <string>com.github.ProjetDeRechercheSurLecriture.tcpp</string>
         </array>
       </dict>
     </array>
