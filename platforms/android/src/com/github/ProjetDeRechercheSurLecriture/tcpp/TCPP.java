@@ -22,7 +22,7 @@ package com.github.ProjetDeRechercheSurLecriture.tcpp;
 import android.os.Bundle;
 import org.apache.cordova.*;
 
-public class TCPP extends CordovaActivity 
+public class TCPP extends CordovaActivity
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -31,7 +31,5 @@ public class TCPP extends CordovaActivity
         super.init();
         // Set by <content src="index.html" /> in config.xml
         super.loadUrl(Config.getStartUrl());
-        //super.loadUrl("file:///android_asset/www/index.html")
     }
 }
-

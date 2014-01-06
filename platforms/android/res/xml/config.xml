@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.github.ProjetDeRechercheSurLecriture.tcpp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Hello Cordova</name>
+<widget id="com.githubProjetDeRechercheSurLecriture.TCPP" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="loglevel" value="DEBUG" />
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
@@ -8,25 +7,49 @@
     <feature name="File">
         <param name="android-package" value="org.apache.cordova.file.FileUtils" />
     </feature>
-    <feature name="Geolocation">
-        <param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
-    </feature>
     <feature name="InAppBrowser">
         <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
     </feature>
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
+    <feature name="ChromeBootstrap">
+        <param name="android-package" value="org.chromium.ChromeBootstrap" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="ChromeExtensionURLs">
+        <param name="android-package" value="org.chromium.ChromeExtensionURLs" />
+        <param name="onload" value="true" />
+    </feature>
+    <access origin="chrome-extension://*" />
+    <preference name="DisallowOverscroll" value="true" />
+    <feature name="ChromeI18n">
+        <param name="android-package" value="org.chromium.ChromeI18n" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="ChromeNavigation">
+        <param name="android-package" value="org.chromium.ChromeNavigation" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="ChromeStorage">
+        <param name="android-package" value="org.chromium.ChromeStorage" />
+    </feature>
+    <name>TCPP</name>
+    <description>
+        Plain text description of this app
+    </description>
+    <author>
+        Author name and email
+    </author>
+    <preference name="chrome-app-id" value="undefined" />
+    <content src="chromeapp.html" />
     <feature name="Media">
         <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
     </feature>
     <feature name="Capture">
         <param name="android-package" value="org.apache.cordova.mediacapture.Capture" />
     </feature>
-    <name>TCPP</name>
-    <description>
-        A sample Apache Cordova application that responds to the deviceready event.
-    </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
-    </author>
-    <content src="index.html" />
-    <access origin="*" />
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
+    </feature>
 </widget>

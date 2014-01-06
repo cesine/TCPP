@@ -1,12 +1,19 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget id="com.github.ProjetDeRechercheSurLecriture.tcpp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:cdv = "http://cordova.apache.org/ns/1.0"
+        id        = "com.githubProjetDeRechercheSurLecriture.TCPP"
+        version   = "0.0.1">
     <name>TCPP</name>
+
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Plain text description of this app
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+
+    <author>
+        Author name and email
     </author>
-    <content src="index.html" />
-    <access origin="*" />
+
+    <preference name="chrome-app-id" value="undefined" />
+    <content src="chromeapp.html" />
+
 </widget>
