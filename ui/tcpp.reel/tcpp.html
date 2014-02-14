@@ -2,6 +2,7 @@
 <html>
 <head>
     <title></title>
+   
     <link rel="stylesheet" type="text/css" href="../../node_modules/oprime-montage/ui/experiment.reel/experiment.css">
     <link rel="stylesheet" type="text/css" href="tcpp.css">
     <script type="text/montage-serialization">
@@ -11,6 +12,30 @@
                 "element": {"#": "experiment"}
             }
         },
+
+        "audiencesController": {
+            "prototype": "montage/core/range-controller"
+        },
+
+        "audiences": {
+            "prototype": "digit/ui/select.reel",
+            "properties": {
+                "element": {"#": "audiences"},
+                "contentController": {"@": "audiencesController"},
+                "labelPropertyName": "text"
+            }
+        },
+
+        "audience": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "audience"}
+            },
+            "bindings": {
+                "value": {"<-": "@audiences.value.gameLabel"}
+            }
+        },
+
         "chooseLanguage": {
             "prototype": "montage/ui/text.reel",
             "properties": {
@@ -41,13 +66,16 @@
                 "element": {"#": "currentStimulusIndexBadge"}
             },
             "bindings": {
-                "value": {"<-": "@owner._currentStimulusIndex"}
+                "value": {"<-": "@owner._currentStimulusIndex + 1"}
             }
         },
         "currentStimulus": {
-            "prototype": "oprime-montage/ui/stimulus.reel/four-image-stimulus.reel",
+            "prototype": "ui/tcpp-stimulus.reel",
             "properties": {
                 "element": {"#": "stimulus"}
+            },
+            "bindings": {
+                "currentReinforcementImageSrc": {"<-": "@reinforcement.currentImageSrc"}
             }
         },
         "currentTestBlockLabel": {
@@ -59,6 +87,30 @@
                 "value": {"<-": "@owner._currentTestBlock.label"}
             }
         },
+
+        "experimentStimuliDialectsController": {
+            "prototype": "montage/core/range-controller"
+        },
+
+        "experimentStimuliDialects": {
+            "prototype": "digit/ui/select.reel",
+            "properties": {
+                "element": {"#": "experimentStimuliDialects"},
+                "contentController": {"@": "experimentStimuliDialectsController"},
+                "labelPropertyName": "label"
+            }
+        },
+
+        "experimentStimuliDialect": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "experimentStimuliDialect"}
+            },
+            "bindings": {
+                "value": {"<-": "@experimentStimuliDialects.value.iso"}
+            }
+        },
+
         "description": {
             "prototype": "digit/ui/text.reel",
             "properties": {
@@ -92,24 +144,44 @@
                 "enabled": true,
                 "label": ">"
             },
-            "listeners": [
-            {
+            "listeners": [{
                 "type": "action",
                 "useCapture": false,
                 "listener": {"@": "nextActionEventListener"}
-            }
-            ]
+            }]
         },
-        "playGame": {
-            "prototype": "digit/ui/image.reel",
+
+        "startExperimentActionEventListener": {
+            "prototype": "montage/core/event/action-event-listener",
             "properties": {
-                "element": {"#": "playGame"},
+                "action": "run",
+                "handler": {"@": "owner"}
+            },
+            "_dev": {
+                "isHidden": true
+            }
+        },
+        "startExperiment": {
+            "prototype": "digit/ui/button.reel",
+            "properties": {
+                "element": {"#": "startExperiment"},
                 "enabled": true,
+                "label": "start",
                 "src": ""
             },
-            "bindings": {
-                "src": {"<-": "@owner.iconSrc"}
-            }
+            "listeners": [{
+                "type": "press",
+                "useCapture": false,
+                "listener": {"@": "startExperimentActionEventListener"}
+            },{
+                "type": "action",
+                "useCapture": false,
+                "listener": {"@": "startExperimentActionEventListener"}
+            },{
+                "type": "longAction",
+                "useCapture": false,
+                "listener": {"@": "startExperimentActionEventListener"}
+            }]
         },
         "previousActionEventListener": {
             "prototype": "montage/core/event/action-event-listener",
@@ -136,13 +208,26 @@
             }
             ]
         },
+
+        "reinforcement": {
+            "prototype": "oprime-montage/ui/reinforcement.reel",
+            "properties": {
+                "element": {"#": "reinforcement"}
+            },
+            "bindings": {
+                "images": {"<-": "@owner._currentTestBlock.reinforcementImages.counter"},
+                "firstImageSrc": {"<-": "@owner._currentTestBlock.reinforcementImages.firstImageSrc"},
+                "lastImageSrc": {"<-": "@owner._currentTestBlock.reinforcementImages.lastImageSrc"}
+            }
+        }, 
+
         "response": {
             "prototype": "oprime-montage/ui/response.reel",
             "properties": {
                 "element": {"#": "response"}
             },
             "bindings": {
-                "json": {"<-": "@responses.objectAtCurrentIteration"}
+                "json": {"<-": "@responses:iteration.object"}
             }
         },
         "responses": {
@@ -167,26 +252,82 @@
                 "removalStrategy": "hide"
             },
             "bindings": {
-                "hidden": {"<-": "!@owner.currentlyPlaying"}
+                "condition": {"<-": "@owner.currentlyPlaying"}
             }
         },
-        "showGameDetailsCondition": {
+        "showStartButtonCondition": {
             "prototype": "montage/ui/condition.reel",
             "properties": {
-                "element": {"#": "showGameDetailsCondition"},
+                "element": {"#": "showStartButtonCondition"},
                 "removalStrategy": "hide"
             },
             "bindings": {
-                "hidden": {"<-": "!@owner.tutorialMode"}
+                "condition": {"<-": "!@owner.currentlyPlaying"}
+            }
+        },
+        "showTutorialCondition": {
+            "prototype": "montage/ui/condition.reel",
+            "properties": {
+                "element": {"#": "showTutorialCondition"},
+                "removalStrategy": "hide"
+            },
+            "bindings": {
+                "condition": {"<-": "@owner.tutorialMode"}
+            }
+        },
+        "showTutorialActionEventListener": {
+            "prototype": "montage/core/event/action-event-listener",
+            "properties": {
+                "action": "toggleTutorialArea",
+                "handler": {"@": "owner"}
+            },
+            "_dev": {
+                "isHidden": true
             }
         },
         "showTutorial": {
             "prototype": "digit/ui/button.reel",
             "properties": {
                 "element": {"#": "showTutorial"},
-                "enabled": true,
-                "label": "Tutorial"
+                "enabled": true
+            },
+            "listeners": [{
+                "type": "action",
+                "useCapture": false,
+                "listener": {"@": "showTutorialActionEventListener"}
+            }]
+        },
+        "showResultReportCondition": {
+            "prototype": "montage/ui/condition.reel",
+            "properties": {
+                "element": {"#": "showResultReportCondition"},
+                "removalStrategy": "hide"
+            },
+            "bindings": {
+                "condition": {"<-": "@owner.resultsReportMode"}
             }
+        },
+        "showResultReportActionEventListener": {
+            "prototype": "montage/core/event/action-event-listener",
+            "properties": {
+                "action": "showResultReport",
+                "handler": {"@": "owner"}
+            },
+            "_dev": {
+                "isHidden": true
+            }
+        },
+        "showResultReport": {
+            "prototype": "digit/ui/button.reel",
+            "properties": {
+                "element": {"#": "showResultReport"},
+                "enabled": true
+            },
+            "listeners": [{
+                "type": "action",
+                "useCapture": false,
+                "listener": {"@": "showResultReportActionEventListener"}
+            }]
         },
         "title": {
             "prototype": "digit/ui/title.reel",
@@ -216,30 +357,41 @@
                 <button data-montage-id="nextButton"></button>
             </div>
         </header>
-        <button data-montage-id="playGame" class="Experiment-start-pause-button"></button>
-        <div data-montage-id="showGameCondition">
-            <div class="Experiment-content-container Main-content-container">
-                <div data-montage-id="stimulus"></div>
-            </div>
+        <div data-montage-id="showStartButtonCondition">
+            <button data-montage-id="startExperiment" class="Experiment-start-pause-button"></button>
         </div>
-        <div data-montage-id="showGameDetailsCondition" class="Experiment-details">
+        <div data-montage-id="showGameCondition" class="Experiment-content-container Main-content-container">
+            <div data-montage-id="stimulus"></div>
+            <div hidden data-montage-id="reinforcement"></div> 
+        </div>
+        <div data-montage-id="showTutorialCondition" class="Experiment-details">
+            Tutorial
             <h1 data-montage-id="title"></h1>
             <span data-montage-id="description"></span>
         </div>
-        <div>
+        <div data-montage-id="showResultReportCondition" class="Experiment-details">
+            Your score!
             <div data-montage-id="resultReport"></div>
         </div>
         <div data-montage-id="confirmDialogOverlay"> </div>
         <footer>
+            <a href = "../../node_modules/oprime-montage/test/lib/cordova/spec.html" hidden>Tests</a>
+
+            <select data-montage-id="experimentStimuliDialects"></select>
+            <span data-montage-id="experimentStimuliDialect"></span>
             <span data-montage-id="currentTestBlockLabel"></span>
             <output data-montage-id="currentStimulusIndexBadge"></output>
-            <button data-montage-id="showTutorial"></button>
+            <button data-montage-id="showTutorial">
+                <i class="fa fa-question-circle"></i>
+            </button>
+            <button data-montage-id="showResultReport">
+                <i class="fa fa-star-half-o"></i>
+            </button>
             <span data-montage-id="chooseLanguage">
-                Change Stimuli Language
+                Stimuli:
             </span>
-            <select></select>
-            View game as:
-            <select ></select>
+            <select data-montage-id="audiences"></select>
+            <span data-montage-id="audience"></span>
             <div data-montage-id="responses" class="Experiment-responses-display">
                 <span data-montage-id="response" class="Experiment-response-debug"></span>
             </div>

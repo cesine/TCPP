@@ -3,22 +3,14 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Main</title>
-
+    <link rel="stylesheet" type="text/css" href="../../node_modules/oprime-montage/assets/fonts/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="main.css">
-
     <script type="text/montage-serialization">
     {
 
         "owner": {
             "properties": {
                 "element": {"#": "main"}
-            }
-        },
-
-        "montageVersion": {
-            "prototype": "ui/version.reel",
-            "properties": {
-                "element": {"#": "montageVersion"}
             }
         },
 
@@ -29,15 +21,51 @@
             }
         },
 
+        "montageVersion": {
+            "prototype": "ui/version.reel",
+            "properties": {
+                "element": {"#": "montageVersion"}
+            }
+        },
+
         "chooseLanguage": {
             "prototype": "montage/ui/text.reel",
             "properties": {
                 "element": {"#": "chooseLanguage"}
             },
-            "localizations": {
-                "value": {
-                    "key": "change_language"
-                }
+            "bindings": {
+                "value": {"<-": "@owner.contextualizer.localize('change_language')"}
+            }
+        },
+
+        "localesController": {
+            "prototype": "montage/core/range-controller",
+            "bindings": {
+                "content": {"<-": "@owner.locales"}
+            }
+        },
+
+        "locales": {
+            "prototype": "digit/ui/select.reel",
+            "properties": {
+                "element": {"#": "locales"},
+                "contentController": {"@": "localesController"},
+                "labelPropertyName": "label"
+            },
+            "listeners": [{
+                "type": "action",
+                "useCapture": false,
+                "listener": {"@": "owner"}
+            }]
+        },
+
+        "locale": {
+            "prototype": "montage/ui/text.reel",
+            "properties": {
+                "element": {"#": "locale"}
+            },
+            "bindings": {
+                "value": {"<-": "@locales.value.iso"}
             }
         }
     }
@@ -46,8 +74,12 @@
 <body>
     <div data-montage-id="main" data-montage-skin="light" class="Main">
         <div data-montage-id="experiment"></div>
-        <div data-montage-id="montageVersion" hidden></div>
-        <div data-montage-id="chooseLanguage" hidden>Change Game Interface Language</div>
+        <div data-montage-id="montageVersion" class="version"></div>
+        <span class="chooseLocale">
+            <span data-montage-id="chooseLanguage"></span>
+            <select data-montage-id="locales" ></select>
+            <span data-montage-id="locale"></span>
+        </span>
     </div>
 </body>
 </html>

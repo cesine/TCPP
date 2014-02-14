@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="tcpp-stimulus.css">
+    <link rel="stylesheet" type="text/css" href="../../node_modules/oprime-montage/ui/stimulus.reel/stimulus.css">
+    <script type="text/montage-serialization">
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "tcppStimulus"}
+            }
+        },
+        "visualPrime": {
+            "prototype": "digit/ui/image.reel",
+            "properties": {
+                "element": {"#": "visualPrime"},
+                "crossOrigin": null
+            },
+            "bindings": {
+                "src": {"<-": "@owner.primeImage ?? '../../assets/img/blank.png'"}
+            }
+        },
+        "reinforcementImage": {
+            "prototype": "digit/ui/image.reel",
+            "properties": {
+                "element": {"#": "reinforcementImage"},
+                "crossOrigin": null
+            },
+            "bindings": {
+                "src": {"<-": "@owner.currentReinforcementImageSrc ?? '../../assets/img/blank.png'"}
+            }
+        }, 
+        "showVisualTargetCondition": {
+            "prototype": "montage/ui/condition.reel",
+            "properties": {
+                "element": {"#": "showVisualTargetCondition"}
+            },
+            "bindings": {
+                "condition": {"<-": "@owner.showVisualTargets"}
+            }
+        },
+        "visualChoiceA": {
+            "prototype": "digit/ui/image.reel",
+            "properties": {
+                "element": {"#": "visualChoiceA"},
+                "crossOrigin": null,
+                "src": ""
+            },
+            "bindings": {
+                "src": {"<-": "@owner.visualChoiceA ?? '' "}
+            }
+        },
+        "visualChoiceB": {
+            "prototype": "digit/ui/image.reel",
+            "properties": {
+                "element": {"#": "visualChoiceB"},
+                "crossOrigin": null,
+                "src": ""
+            },
+            "bindings": {
+                "src": {"<-": "@owner.visualChoiceB ?? ''"}
+            }
+        },
+        "visualChoiceC": {
+            "prototype": "digit/ui/image.reel",
+            "properties": {
+                "element": {"#": "visualChoiceC"},
+                "crossOrigin": null,
+                "src": ""
+            },
+            "bindings": {
+                "src": {"<-": "@owner.visualChoiceC ?? ''"}
+            }
+        },
+        "visualChoiceD": {
+            "prototype": "digit/ui/image.reel",
+            "properties": {
+                "element": {"#": "visualChoiceD"},
+                "crossOrigin": null,
+                "src": ""
+            },
+            "bindings": {
+                "src": {"<-": "@owner.visualChoiceD ?? ''"}
+            }
+        }
+        
+    }
+    </script>
+</head>
+<body> 
+    <div data-montage-id="tcppStimulus" class="TCPPStimulus Main-content-container">
+        <div class="Stimulus-prime-image-area">
+            <img data-montage-id="visualPrime" class="Stimulus-prime-image" src="">
+        </div>
+        <div class="Stimulus-content-left">
+            <div data-montage-id="showVisualTargetCondition"  class="Stimulus-choose-area Stimulus-touchable">
+                <img data-montage-id="visualChoiceA" class="Stimulus-choose-image Stimulus-record-touch-response" src="">
+                <img data-montage-id="visualChoiceB" class="Stimulus-choose-image Stimulus-record-touch-response" src="">
+                <img data-montage-id="visualChoiceC" class="Stimulus-choose-image Stimulus-record-touch-response" src="">
+                <img data-montage-id="visualChoiceD" class="Stimulus-choose-image Stimulus-record-touch-response" src="">
+            </div>
+        </div>
+        <div class="Stimulus-content-right">
+            <img data-montage-id="reinforcementImage" src="../../assets/img/blank.png"/>
+        </div>
+        
+        <audio id="audio" src=""></audio>
+    </div>
+</body>
+</html>
