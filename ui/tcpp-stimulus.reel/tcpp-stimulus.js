@@ -32,28 +32,11 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 			var audioPath = this.audioAssetsPath || "missingpath";
 			audioPath += "/";
 
-			var visualImages = stimulus.distractorImages.join(":::").split(":::");
-			visualImages.push(stimulus.targetImage);
-			for (var i = 0; i < visualImages.length; i++) {
-				var filename = visualImages[i];
-				var imagePosition = filename.split("_")[0] % 4;
-				switch (imagePosition) {
-					case 1:
-						stimulus.visualChoiceA = imagePath + filename;
-						break;
-					case 2:
-						stimulus.visualChoiceB = imagePath + filename;
-						break;
-					case 3:
-						stimulus.visualChoiceC = imagePath + filename;
-						break;
-					case 0:
-						stimulus.visualChoiceD = imagePath + filename;
-						break;
-					default:
-						break;
-				}
-			}
+			stimulus.visualChoiceA = imagePath + stimulus.audioFileIntroduceTargetsTiming.visualChoiceA.imageFile;
+			stimulus.visualChoiceB = imagePath + stimulus.audioFileIntroduceTargetsTiming.visualChoiceB.imageFile;
+			stimulus.visualChoiceC = imagePath + stimulus.audioFileIntroduceTargetsTiming.visualChoiceC.imageFile;
+			stimulus.visualChoiceD = imagePath + stimulus.audioFileIntroduceTargetsTiming.visualChoiceD.imageFile;
+
 			stimulus.audioFile = audioPath + stimulus.audioFile;
 			stimulus.primeImage = imagePath + stimulus.primeImage;
 			stimulus.audioFileIntroduceTargets = audioPath + stimulus.audioFileIntroduceTargets;
@@ -66,7 +49,7 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 			this.handleAnimateVisualPrime();
 
 			this.application.addEventListener("animateVisualTargets", this);
-			this.application.audioPlayer.addEvent("animateVisualTargets:::"+stimulus.audioFile, "end");
+			this.application.audioPlayer.addEvent("animateVisualTargets:::" + stimulus.audioFile, "end");
 
 		}
 	},
