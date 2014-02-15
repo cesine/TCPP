@@ -60,41 +60,46 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 			/* Dont draw the images yet, wait until we say its time */
 			this.showVisualTargets = false;
 
-			var cueToShowPrime = stimulus.cueToShowPrime;
-			var self = this;
-
-			setTimeout(function() {
-				self.animateVisualPrime();
-			}, cueToShowPrime);
-
-			var cueToShowTargets = stimulus.cueToShowTargets;
-			setTimeout(function() {
-				self.animateVisualTargets();
-			}, cueToShowTargets);
-
 			this.super(stimulus);
+			this.playAudio();
+
+			this.handleAnimateVisualPrime();
+
+			this.application.addEventListener("animateVisualTargets", this);
+			this.application.audioPlayer.addEvent("animateVisualTargets:::"+stimulus.audioFile, "end");
+
 		}
 	},
 
-	animateVisualPrime: {
+	handleAnimateVisualPrime: {
 		value: function() {
 			console.log("animating visual prime");
-			this.templateObjects.visualPrime.element.parentElement.style.width = "50%";
+			// this.application.removeEventListener("animateVisualPrime", this);
+
+			this.templateObjects.visualPrime.element.parentElement.style.width = "60%";
+			this.templateObjects.visualPrime.element.parentElement.style["margin-top"] = "-6%";
 			this.templateObjects.visualPrime.element.parentElement.style["-webkit-animation"] = "";
+			this.templateObjects.visualPrime.element.style.opacity = "1";
 		}
 	},
 
-	animateVisualTargets: {
+	handleAnimateVisualTargets: {
 		value: function() {
+			// this.application.removeEventListener("animateVisualTargets", this);
+
+			var self = this;
 			console.log("animating visual targets");
-			this.showVisualTargets = true;
 			this.templateObjects.visualPrime.element.parentElement.style["-webkit-animation"] = "TCPP-stimulus-move-prime ease-in-out 2s";
 			this.templateObjects.visualPrime.element.parentElement.style.width = "19%";
-			this.templateObjects.visualPrime.element.parentElement.style["margin-top"] = "20%";
-			// this.templateObjects.showVisualTargetCondition.element.parentElement.style["-webkit-animation"] = "TCPP-stimulus-move-prime ease-in-out 2s";
-			this.templateObjects.showVisualTargetCondition.element.parentElement.style.width = "50%";
+			this.templateObjects.visualPrime.element.parentElement.style["margin-top"] = "10%";
+			this.templateObjects.visualPrime.element.style.opacity = ".5";
 
-			this.introduceTargetStimuli();
+			window.setTimeout(function() {
+				self.showVisualTargets = true;
+				self.templateObjects.showVisualTargetCondition.element.parentElement.style.width = "60%";
+				self.introduceTargetStimuli();
+
+			}, 2100);
 		}
 	},
 
@@ -124,8 +129,8 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 						self.templateObjects.visualChoiceC.element.style["-webkit-animation"] = "";
 						self.templateObjects.visualChoiceD.element.style["-webkit-animation"] = "";
 					} else {
-						var duration = cue/1000 || 1;
-						self.templateObjects[visualTargetId].element.style["-webkit-animation"] = "Introduce-target-image "+duration+"s";
+						var duration = cue / 1000 || 1;
+						self.templateObjects[visualTargetId].element.style["-webkit-animation"] = "Introduce-target-image " + duration + "s";
 						introduceNext(self.audioFileIntroduceTargetsTiming[visualTargetId].nextIntroduction);
 					}
 				}, cue);

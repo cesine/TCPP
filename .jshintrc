@@ -12,6 +12,7 @@
   "eqnull": true,
   "node": true,
   "globals": {
-    "montageRequire": true
+    "montageRequire": true,
+    "window": true
   }
 }
