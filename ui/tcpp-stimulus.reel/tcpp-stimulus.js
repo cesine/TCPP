@@ -2,8 +2,7 @@
  * @module ui/tcpp-stimulus.reel
  * @requires core/contextualizable-component
  */
-var ContextualizableComponent = require("core/contextualizable-component").ContextualizableComponent,
-	AbstractStimulus = require("core/abstract-stimulus").AbstractStimulus;
+var AbstractStimulus = require("oprime-montage/core/abstract-stimulus").AbstractStimulus;
 
 /** dealy audio autoplay 
  * Reference from
@@ -14,17 +13,11 @@ var ContextualizableComponent = require("core/contextualizable-component").Conte
  * @class TCPPStimulus
  * @extends AbstractStimulus
  */
-exports.TCPPStimulus = AbstractStimulus.specialize( /** @lends TCPPStimulus# */ {
+var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lends TCPPStimulus# */ {
 	constructor: {
 		value: function TCPPStimulus() {
 			this.super();
 			this.confirmResponseChoiceMessage = "Are you sure?";
-			this.primeImage = "";
-			this.visualChoiceA = "";
-			this.visualChoiceB = "";
-			this.visualChoiceC = "";
-			this.visualChoiceD = "";
-			this.audioFile = "";
 		}
 	},
 
@@ -64,16 +57,8 @@ exports.TCPPStimulus = AbstractStimulus.specialize( /** @lends TCPPStimulus# */ 
 			stimulus.audioFile = audioPath + stimulus.audioFile;
 			stimulus.primeImage = imagePath + stimulus.primeImage;
 			stimulus.audioFileIntroduceTargets = audioPath + stimulus.audioFileIntroduceTargets;
-			this.showVisualTargets = false;
 			/* Dont draw the images yet, wait until we say its time */
-			this.templateObjects.visualPrime.element.hidden = true;
-			this.templateObjects.visualPrime.element.style.width = "15%";
-
-			// this.templateObjects.visualPrime.canDrawGate.setField("allowed", false);
-
-			this.templateObjects.showVisualTargetCondition.element.hidden = true;
-			// this.templateObjects.showVisualTargetCondition.canDrawGate.setField("allowed", false);
-			// this.templateObjects.visualReinforcement.canDrawGate.setField("allowed", false);
+			this.showVisualTargets = false;
 
 			var cueToShowPrime = stimulus.cueToShowPrime;
 			var self = this;
@@ -94,10 +79,8 @@ exports.TCPPStimulus = AbstractStimulus.specialize( /** @lends TCPPStimulus# */ 
 	animateVisualPrime: {
 		value: function() {
 			console.log("animating visual prime");
-			// this.templateObjects.visualPrime.canDrawGate.setField("allowed", true);
-			this.templateObjects.visualPrime.element.style.width = "50%";
-			this.templateObjects.visualPrime.element.style["-webkit-animation"] = "";
-			this.templateObjects.visualPrime.element.hidden = false;
+			this.templateObjects.visualPrime.element.parentElement.style.width = "50%";
+			this.templateObjects.visualPrime.element.parentElement.style["-webkit-animation"] = "";
 		}
 	},
 
@@ -105,20 +88,19 @@ exports.TCPPStimulus = AbstractStimulus.specialize( /** @lends TCPPStimulus# */ 
 		value: function() {
 			console.log("animating visual targets");
 			this.showVisualTargets = true;
-			this.templateObjects.visualPrime.element.style["-webkit-animation"] = "TCPP-stimulus-move-prime ease-in-out 2s";
-			this.templateObjects.visualPrime.element.style.width = "15%";
+			this.templateObjects.visualPrime.element.parentElement.style["-webkit-animation"] = "TCPP-stimulus-move-prime ease-in-out 2s";
+			this.templateObjects.visualPrime.element.parentElement.style.width = "19%";
+			this.templateObjects.visualPrime.element.parentElement.style["margin-top"] = "20%";
+			// this.templateObjects.showVisualTargetCondition.element.parentElement.style["-webkit-animation"] = "TCPP-stimulus-move-prime ease-in-out 2s";
+			this.templateObjects.showVisualTargetCondition.element.parentElement.style.width = "50%";
 
-			this.templateObjects.showVisualTargetCondition.element.hidden = false;
-			// this.templateObjects.showVisualTargetCondition.canDrawGate.setField("allowed", true);
-			// this.templateObjects.visualReinforcement.canDrawGate.setField("allowed", false);
 			this.introduceTargetStimuli();
 		}
 	},
 
 	introduceTargetStimuli: {
 		value: function() {
-			this.audioElement.src = this.audioFileIntroduceTargets;
-			this.audioElement.play();
+			this.application.audioPlayer.play(this.audioFileIntroduceTargets);
 
 			this.templateObjects.visualChoiceA.element.style.opacity = ".3";
 			this.templateObjects.visualChoiceB.element.style.opacity = ".3";
@@ -152,3 +134,5 @@ exports.TCPPStimulus = AbstractStimulus.specialize( /** @lends TCPPStimulus# */ 
 		}
 	}
 });
+
+exports.TcppStimulus = TCPPStimulus;

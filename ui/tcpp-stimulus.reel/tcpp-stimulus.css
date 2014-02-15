@@ -1,35 +1,48 @@
 .TCPPStimulus {
-
-}
-
-.TCPPStimulus .Stimulus-prime-image-area {
-	min-height:20%;
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
+	text-align: center;
 	position: absolute;
-	top: -10%;
-	opacity: .9;
+	width: 100%;
 }
 
-.TCPPStimulus .Stimulus-prime-image-area img {
-	margin-left: auto;
-	margin-right: auto;
-	width: 15%;
+.Stimulus-prime-image-area {
+	width: 60%;
+	float: left;
+}
+
+.Stimulus-prime-image-area img {
+	width: 100%;
+}
+
+.Stimulus-content-left {
+	width: 1%;
+}
+
+.Stimulus-content-left img {
+	width: 45%;
+}
+
+.Stimulus-content-right {
+	width: 19%;
+	float: right;
+}
+
+.Stimulus-content-right img{
+	width: 49%;
+	float: right;
+	text-align: center;
 }
 .Stimulus-choose-area {
-	/*background-color: #FFFFCC;
-	border-radius: 150px;*/
+	/*background-color: #FFFFCC;*/
 }
 
 @keyframes TCPP-stimulus-move-prime
 {
-	0%   {width: 50%;}
-	100%  {width: 15%;}
+	0%   {width: 60%;}
+	100%  {width: 19%; margin-top:20%;}
 }
 
 @-webkit-keyframes TCPP-stimulus-move-prime /* Safari and Chrome */
 {
-	0%   {width: 50%;}
-	100%  {width: 15%;}
+	0%   {width: 60%;}
+	100%  {width: 19%; margin-top:20%;}
 }
