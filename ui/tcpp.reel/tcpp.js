@@ -26,6 +26,10 @@ var TCPP = exports.TCPP = Experiment.specialize( /** @lends TCPP# */ {
         }
     },
 
+    experimentType: {
+        value: "tcpp"
+    },
+
     handleStartExperimentPress: {
         value: function() {
             console.log("start button action ");
