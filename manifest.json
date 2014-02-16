@@ -20,6 +20,6 @@
   },
 
   "sandbox": {
-    "pages": ["index.html"]
+    "pages": ["index.html", "results.html"]
   }
 }
