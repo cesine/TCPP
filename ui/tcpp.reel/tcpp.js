@@ -30,7 +30,8 @@ var TCPP = exports.TCPP = Experiment.specialize( /** @lends TCPP# */ {
         value: function() {
             console.log("start button action ");
         }
-    }
+    },
+
     // enterDocument: {
     //     value: function() {
     //         this.super();
@@ -44,6 +45,63 @@ var TCPP = exports.TCPP = Experiment.specialize( /** @lends TCPP# */ {
     // templateModuleId: {
     //     value: "oprime-montage/ui/experiment.reel/experiment.html"
     // }
+    transform: {
+        value: function() {
+
+            x = JSON.parse(JSON.stringify(designToForceIncludeInMop))
+            for (var subexperimentIndex = 0; subexperimentIndex < x.subexperiments.length; subexperimentIndex++) {
+                var subexperiment = x.subexperiments[subexperimentIndex];
+                subexperiment.scoreSubTotal = 0;
+                for (var stimulusIndex = 0; stimulusIndex < subexperiment.trials.length; stimulusIndex++) {
+                    var stimulus = subexperiment.trials[stimulusIndex];
+
+                    stimulus.prime.carrierPhrase = stimulus.auditoryStimulus;
+                    delete stimulus.auditoryStimulus;
+
+                    stimulus.prime.phonemic = stimulus.primePhonemeic.replace(/\//g, "");
+                    delete stimulus.primePhonemeic;
+
+                    stimulus.prime.imageFile = stimulus.primeImage;
+                    stimulus.prime.orthographic = stimulus.audioFile.replace(".mp3", "").replace(/TCPP_/g, "").replace(/\d/g, "");
+                    delete stimulus.primeImage;
+
+                    stimulus.prime.carrierAudio = stimulus.audioFile;
+                    delete stimulus.audioFile;
+
+                    stimulus.target.phonemic = stimulus.targetPhonemic.replace(/\//g, "");
+                    delete stimulus.targetPhonemic;
+
+                    stimulus.target.imageFile = stimulus.targetImage;
+                    stimulus.target.orthographic = stimulus.targetImage.replace(".png", "").replace(/\d+_/g, "")
+                    delete stimulus.targetImage;
+
+                    for (var distractor = 0; distractor < stimulus.distractorImages.length; distractor++) {
+                        stimulus.distractors.push({
+                            phonemic: stimulus.distractorImages[distractor].replace(".png", "").replace(/\d+_/g, ""),
+                            imageFile: stimulus.distractorImages[distractor],
+                            orthographic: stimulus.distractorImages[distractor].replace(".png", "").replace(/\d+_/g, "")
+                        });
+                    }
+                    delete stimulus.distractorImages;
+                    delete stimulus.cueToShowPrime;
+                    delete stimulus.cueToShowTargets;
+
+                    stimulus.audioFileIntroduceChoicesTiming = stimulus.audioFileIntroduceTargetsTiming;
+                    delete stimulus.audioFileIntroduceTargetsTiming;
+
+                    stimulus.audioFileIntroduceChoicesTiming.firstChoice = stimulus.audioFileIntroduceFirstTarget;
+                    delete stimulus.audioFileIntroduceFirstTarget;
+
+                    stimulus.audioFileIntroduceChoicesTiming.audioFile = stimulus.audioFileIntroduceTargets;
+                    delete stimulus.audioFileIntroduceTargets;
+
+                }
+            }
+            x.subexperiments[0].trials[0]
+            x.subexperiments[1].trials[6]
+
+        }
+    }
 });
 
 exports.Tcpp = TCPP;

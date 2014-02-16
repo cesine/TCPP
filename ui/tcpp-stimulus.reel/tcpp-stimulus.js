@@ -32,14 +32,14 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 			var audioPath = this.audioAssetsPath || "missingpath";
 			audioPath += "/";
 
-			stimulus.visualChoiceA = imagePath + stimulus.audioFileIntroduceTargetsTiming.visualChoiceA.imageFile;
-			stimulus.visualChoiceB = imagePath + stimulus.audioFileIntroduceTargetsTiming.visualChoiceB.imageFile;
-			stimulus.visualChoiceC = imagePath + stimulus.audioFileIntroduceTargetsTiming.visualChoiceC.imageFile;
-			stimulus.visualChoiceD = imagePath + stimulus.audioFileIntroduceTargetsTiming.visualChoiceD.imageFile;
+			this.visualChoiceA = imagePath + stimulus.audioFileIntroduceChoicesTiming.visualChoiceA.imageFile;
+			this.visualChoiceB = imagePath + stimulus.audioFileIntroduceChoicesTiming.visualChoiceB.imageFile;
+			this.visualChoiceC = imagePath + stimulus.audioFileIntroduceChoicesTiming.visualChoiceC.imageFile;
+			this.visualChoiceD = imagePath + stimulus.audioFileIntroduceChoicesTiming.visualChoiceD.imageFile;
 
-			stimulus.audioFile = audioPath + stimulus.audioFile;
-			stimulus.primeImage = imagePath + stimulus.primeImage;
-			stimulus.audioFileIntroduceTargets = audioPath + stimulus.audioFileIntroduceTargets;
+			this.audioFile = audioPath + stimulus.prime.carrierAudio;
+			this.primeImage = imagePath + stimulus.prime.imageFile;
+			this.audioFileWhichIntroduceChoices = audioPath + stimulus.audioFileIntroduceChoicesTiming.audioFile;
 			/* Dont draw the images yet, wait until we say its time */
 			this.showVisualTargets = false;
 
@@ -47,9 +47,9 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 			this.playAudio();
 
 			this.handleAnimateVisualPrime();
-
-			this.application.addEventListener("animateVisualTargets", this);
-			this.application.audioPlayer.addEvent("animateVisualTargets:::" + stimulus.audioFile, "end");
+			this.handleAnimateVisualTargets();
+			// this.application.addEventListener("animateVisualTargets", this);
+			// this.application.audioPlayer.addEvent("animateVisualTargets:::" + stimulus.audioFile, "end");
 
 		}
 	},
@@ -88,7 +88,7 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 
 	introduceTargetStimuli: {
 		value: function() {
-			this.application.audioPlayer.play(this.audioFileIntroduceTargets);
+			this.application.audioPlayer.play(this.audioFileWhichIntroduceChoices);
 
 			this.templateObjects.visualChoiceA.element.style.opacity = ".3";
 			this.templateObjects.visualChoiceB.element.style.opacity = ".3";
@@ -97,7 +97,7 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 
 			var self = this;
 			var introduceNext = function(visualTargetId) {
-				var cue = self.audioFileIntroduceTargetsTiming[visualTargetId].delay;
+				var cue = self.audioFileIntroduceChoicesTiming[visualTargetId].delay;
 				window.setTimeout(function() {
 					if (visualTargetId === "done") {
 						self.startWaitingForUserToRespond = Date.now();
@@ -114,11 +114,11 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 					} else {
 						var duration = cue / 1000 || 1;
 						self.templateObjects[visualTargetId].element.style["-webkit-animation"] = "Introduce-target-image " + duration + "s";
-						introduceNext(self.audioFileIntroduceTargetsTiming[visualTargetId].nextIntroduction);
+						introduceNext(self.audioFileIntroduceChoicesTiming[visualTargetId].nextIntroduction);
 					}
 				}, cue);
 			};
-			introduceNext(this.audioFileIntroduceFirstTarget);
+			introduceNext(this.audioFileIntroduceChoicesTiming.firstChoice);
 		}
 	}
 });

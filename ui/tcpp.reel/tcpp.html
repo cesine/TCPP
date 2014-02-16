@@ -240,18 +240,12 @@
             }
         },
         "resultReport": {
-            "prototype": "oprime-montage/ui/report.reel",
+            "prototype": "oprime-montage/ui/report.reel/experiment-report.reel",
             "properties": {
                 "element": {"#": "resultReport"}
-            }
-        },
-        "simpleScoreAsText": {
-            "prototype": "montage/ui/text.reel",
-            "properties": {
-                "element": {"#": "simpleScoreAsText"}
             },
             "bindings": {
-                "value": {"<-": "@owner.calculateScore(@owner._currentStimulusIndex)"}
+                "experimentalDesign": {"<-": "@owner.experimentalDesign"}
             }
         },
         "showGameCondition": {
@@ -379,9 +373,7 @@
             <span data-montage-id="description"></span>
         </div>
         <div data-montage-id="showResultReportCondition" class="Experiment-details">
-            Your score!
             <div data-montage-id="resultReport"></div>
-            <div data-montage-id="simpleScoreAsText"></div>
         </div>
         <div data-montage-id="confirmDialogOverlay"> </div>
         <footer>
