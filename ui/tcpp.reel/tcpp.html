@@ -240,7 +240,7 @@
             }
         },
         "resultReport": {
-            "prototype": "oprime-montage/ui/report.reel",
+            "prototype": "oprime-montage/ui/report.reel/experiment-report.reel",
             "properties": {
                 "element": {"#": "resultReport"}
             },
@@ -307,7 +307,10 @@
                 "removalStrategy": "hide"
             },
             "bindings": {
-                "condition": {"<-": "@owner.resultsReportMode"}
+                "condition": {"<-": "@owner.resultsReportMode"},
+                "classList.has('bluebody')": {
+                    "<-": "@owner.resultsReportMode"
+                }
             }
         },
         "showResultReportActionEventListener": {
