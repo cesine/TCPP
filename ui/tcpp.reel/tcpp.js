@@ -35,68 +35,13 @@ var TCPP = exports.TCPP = Experiment.specialize( /** @lends TCPP# */ {
             console.log("start button action ");
         }
     },
-
-
-    addSelectListeners: {
+    
+    handleAudiencesChange: {
         value: function() {
-            console.log("addSelectListeners");
-            // this.templateObjects.rangeController.content = this.content;
-            this.templateObjects.audiencesController.content = this.audiences;
-            this.templateObjects.experimentStimuliDialectsController.content = this.locales;
-
-            //Observe the selection for changes
-            // this.templateObjects.rangeController.addRangeAtPathChangeListener(
-            //  "selection", this, "handleSelectionChange");
-            // this.audiencesController = RangeController.create().initWithContent(this.audiences);
-            // this.audiencesController.selection = [];
-            // this.audiencesController.addRangeAtPathChangeListener(
-            //  "selection", this, "handleAudienceChange");
-            this.templateObjects.audiencesController.addRangeAtPathChangeListener(
-                "selection", this, "handleSelectionChange");
-            // this.localesController = RangeController.create().initWithContent();
-            // this.localesController.selection = [];
-            // this.localesController.addRangeAtPathChangeListener(
-            //  "selection", this, "handleLocaleChange");
-            this.templateObjects.experimentStimuliDialectsController.addRangeAtPathChangeListener(
-                "selection", this, "handleSelectionChange");
+            console.log("handleAudiencesChange");
         }
     },
 
-    enterDocument: {
-        value: function(firstTime) {
-            this.super(firstTime);
-
-            if (firstTime) {
-                this.addSelectListeners();
-            }
-        }
-    },
-
-    handleSelectionChange: {
-        value: function(plus, minus) {
-            console.log("Selection changed from: " + (minus[0] ? minus[0].quote : "nothing") + " -> " + (plus[0] ? plus[0].quote : "nothing"));
-        }
-    },
-
-    handleValuesRangeChange: {
-        value: function(plus, minus) {
-            console.log("Selection changed from: " + (minus[0] ? minus[0].quote : "nothing") + " -> " + (plus[0] ? plus[0].quote : "nothing"));
-        }
-    },
-
-    // enterDocument: {
-    //     value: function() {
-    //         this.super();
-    //         this.templateObjects.currentStimulus.templateObjects.reinforcement.images = ;
-
-    //         this.templateObjects.currentStimulus.templateObjects.reinforcement.firstImageSrc = "../../../../assets/stimuli/image/r00_caterpillars.png";
-    //         this.templateObjects.currentStimulus.templateObjects.reinforcement.lastImageSrc = "";
-    //         this.templateObjects.currentStimulus.templateObjects.reinforcement.showFirst();
-    //     }
-    // }
-    // templateModuleId: {
-    //     value: "oprime-montage/ui/experiment.reel/experiment.html"
-    // }
     transform: {
         value: function() {
 

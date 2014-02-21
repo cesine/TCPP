@@ -2,7 +2,7 @@
 <html>
 <head>
     <title></title>
-   
+
     <link rel="stylesheet" type="text/css" href="../../node_modules/oprime-montage/ui/experiment.reel/experiment.css">
     <link rel="stylesheet" type="text/css" href="tcpp.css">
     <script type="text/montage-serialization">
@@ -14,7 +14,11 @@
         },
 
         "audiencesController": {
-            "prototype": "montage/core/range-controller"
+            "prototype": "montage/core/range-controller",
+            "bindings": {
+                "selection": {"<->": "@owner.application.audienceSelection"},
+                "content": {"<->": "@owner.audiences"}
+            }
         },
 
         "audiences": {
@@ -23,7 +27,15 @@
                 "element": {"#": "audiences"},
                 "contentController": {"@": "audiencesController"},
                 "labelPropertyName": "text"
-            }
+            },
+            "bindings": {
+                "value": {"<->": "@owner.application.audienceSelection[0]"}
+            },
+            "listeners": [{
+                "type": "change",
+                "useCapture": false,
+                "listener": {"@": "owner"}
+            }]
         },
 
         "audience": {
@@ -89,7 +101,11 @@
         },
 
         "experimentStimuliDialectsController": {
-            "prototype": "montage/core/range-controller"
+            "prototype": "montage/core/range-controller",
+            "bindings": {
+                "selection": {"<->": "@owner.application.stimuliDialectsSelection"},
+                "content": {"<->": "@owner.stimuliDialects"}
+            }
         },
 
         "experimentStimuliDialects": {
