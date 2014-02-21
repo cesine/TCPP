@@ -21,21 +21,13 @@
             }
         },
 
-        "audiences": {
+        "audiencesList": {
             "prototype": "digit/ui/select.reel",
             "properties": {
-                "element": {"#": "audiences"},
+                "element": {"#": "audiencesList"},
                 "contentController": {"@": "audiencesController"},
                 "labelPropertyName": "text"
-            },
-            "bindings": {
-                "value": {"<->": "@owner.application.audienceSelection[0]"}
-            },
-            "listeners": [{
-                "type": "change",
-                "useCapture": false,
-                "listener": {"@": "owner"}
-            }]
+            }
         },
 
         "audience": {
@@ -44,7 +36,7 @@
                 "element": {"#": "audience"}
             },
             "bindings": {
-                "value": {"<-": "@audiences.value.gameLabel"}
+                "value": {"<-": "@audiencesList.value.gameLabel"}
             }
         },
 
@@ -412,7 +404,7 @@
             <span data-montage-id="chooseLanguage">
                 Stimuli:
             </span>
-            <select data-montage-id="audiences"></select>
+            <select data-montage-id="audiencesList"></select>
             <span data-montage-id="audience"></span>
             <div data-montage-id="responses" class="Experiment-responses-display">
                 <span data-montage-id="response" class="Experiment-response-debug"></span>
