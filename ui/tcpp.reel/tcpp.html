@@ -13,30 +13,10 @@
             }
         },
 
-        "audiencesController": {
-            "prototype": "montage/core/range-controller",
-            "bindings": {
-                "selection": {"<->": "@owner.application.audienceSelection"},
-                "content": {"<->": "@owner.audiences"}
-            }
-        },
-
-        "audiencesList": {
-            "prototype": "digit/ui/select.reel",
-            "properties": {
-                "element": {"#": "audiencesList"},
-                "contentController": {"@": "audiencesController"},
-                "labelPropertyName": "text"
-            }
-        },
-
         "audience": {
-            "prototype": "montage/ui/text.reel",
+            "prototype": "oprime-montage/ui/audiences.reel",
             "properties": {
                 "element": {"#": "audience"}
-            },
-            "bindings": {
-                "value": {"<-": "@audiencesList.value.gameLabel"}
             }
         },
 
@@ -386,6 +366,7 @@
         </div>
         <div data-montage-id="showResultReportCondition" class="Experiment-results">
             <div data-montage-id="resultReport"></div>
+            <span data-montage-id="audience"></span>
         </div>
         <div data-montage-id="confirmDialogOverlay"> </div>
         <footer>
@@ -404,8 +385,6 @@
             <span data-montage-id="chooseLanguage">
                 Stimuli:
             </span>
-            <select data-montage-id="audiencesList"></select>
-            <span data-montage-id="audience"></span>
             <div data-montage-id="responses" class="Experiment-responses-display">
                 <span data-montage-id="response" class="Experiment-response-debug"></span>
             </div>

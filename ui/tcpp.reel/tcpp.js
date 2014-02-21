@@ -36,29 +36,6 @@ var TCPP = exports.TCPP = Experiment.specialize( /** @lends TCPP# */ {
         }
     },
 
-    handleAudiencesChange: {
-        value: function() {
-            console.log("handleAudiencesChange");
-        }
-    },
-
-
-    // proof that change listeners on selects should work http://montagejs.github.io/mfiddle/#!/9139676
-    templateDidLoad: {
-        value: function() {
-            // this.templateObjects.audiencesController.content = this.content;
-            //Observe the selection for changes
-            this.templateObjects.audiencesController.addRangeAtPathChangeListener(
-                "selection", this, "handleSelectionChange");
-        }
-    },
-
-    handleSelectionChange: {
-        value: function(plus, minus) {
-            console.log("handleSelectionChange Selection changed from: ", minus, plus);
-        }
-    },
-
     transform: {
         value: function() {
 
