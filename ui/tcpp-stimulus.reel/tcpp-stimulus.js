@@ -40,16 +40,20 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 			this.audioFile = audioPath + stimulus.prime.carrierAudio;
 			this.primeImage = imagePath + stimulus.prime.imageFile;
 			this.audioFileWhichIntroduceChoices = audioPath + stimulus.audioFileIntroduceChoicesTiming.audioFile;
+			
 			/* Dont draw the images yet, wait until we say its time */
 			this.showVisualTargets = false;
 
 			this.super(stimulus);
-			this.playAudio();
-
 			this.handleAnimateVisualPrime();
-			this.handleAnimateVisualTargets();
-			// this.application.addEventListener("animateVisualTargets", this);
-			// this.application.audioPlayer.addEvent("animateVisualTargets:::" + stimulus.audioFile, "end");
+
+			this.application.debugMode = true; // TODO control with the audience select
+			if (this.application.debugMode) {
+				this.handleAnimateVisualTargets();
+			} else {
+				this.application.addEventListener("animateVisualTargets", this);
+				this.application.audioPlayer.addEvent("animateVisualTargets:::" + this.audioFile, "end");
+			}
 
 		}
 	},
@@ -58,6 +62,7 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 		value: function() {
 			console.log("animating visual prime");
 			// this.application.removeEventListener("animateVisualPrime", this);
+			this.playAudio();
 
 			this.templateObjects.visualPrime.element.parentElement.style.width = "60%";
 			this.templateObjects.visualPrime.element.parentElement.style["margin-top"] = "-6%";
