@@ -245,7 +245,8 @@
                 "element": {"#": "resultReport"}
             },
             "bindings": {
-                "experimentalDesign": {"<->": "@owner.experimentalDesign"}
+                "experimentalDesign": {"<->": "@owner.experimentalDesign"},
+                "iconSrc" : {"<-": "@owner.iconSrc"}
             }
         },
         "showGameCondition": {
@@ -308,7 +309,7 @@
             },
             "bindings": {
                 "condition": {"<-": "@owner.resultsReportMode"},
-                "classList.has('bluebody')": {
+                "classList.has('orangebody')": {
                     "<-": "@owner.resultsReportMode"
                 }
             }
@@ -354,7 +355,7 @@
     </script>
 </head>
 <body>
-    <div data-montage-id="experiment" class="Experiment">
+    <div data-montage-id="experiment" class="Experiment TCPP">
         <header class="Main-content-container">
             <div class="Experiment-previous-button">
                 <button data-montage-id="previousButton"></button>
