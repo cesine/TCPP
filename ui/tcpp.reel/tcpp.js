@@ -4,7 +4,7 @@
  */
 var Experiment = require("oprime-montage/ui/experiment.reel").Experiment,
     designToForceIncludeInMop = require("assets/stimuli/tcpp_design.json");
-    // sampleResultToForceIncludeInMop = require("assets/stimuli/tcpp_sample_result.json");
+// sampleResultToForceIncludeInMop = require("assets/stimuli/tcpp_sample_result.json");
 
 // var enLocales = require("assets/stimuli/locale/en/messages.json");
 // var frLocales = require("assets/stimuli/locale/fr/messages.json");
@@ -33,6 +33,54 @@ var TCPP = exports.TCPP = Experiment.specialize( /** @lends TCPP# */ {
     handleStartExperimentPress: {
         value: function() {
             console.log("start button action ");
+        }
+    },
+
+
+    addSelectListeners: {
+        value: function() {
+            console.log("addSelectListeners");
+            // this.templateObjects.rangeController.content = this.content;
+            this.templateObjects.audiencesController.content = this.audiences;
+            this.templateObjects.experimentStimuliDialectsController.content = this.locales;
+
+            //Observe the selection for changes
+            // this.templateObjects.rangeController.addRangeAtPathChangeListener(
+            //  "selection", this, "handleSelectionChange");
+            // this.audiencesController = RangeController.create().initWithContent(this.audiences);
+            // this.audiencesController.selection = [];
+            // this.audiencesController.addRangeAtPathChangeListener(
+            //  "selection", this, "handleAudienceChange");
+            this.templateObjects.audiencesController.addRangeAtPathChangeListener(
+                "selection", this, "handleSelectionChange");
+            // this.localesController = RangeController.create().initWithContent();
+            // this.localesController.selection = [];
+            // this.localesController.addRangeAtPathChangeListener(
+            //  "selection", this, "handleLocaleChange");
+            this.templateObjects.experimentStimuliDialectsController.addRangeAtPathChangeListener(
+                "selection", this, "handleSelectionChange");
+        }
+    },
+
+    enterDocument: {
+        value: function(firstTime) {
+            this.super(firstTime);
+
+            if (firstTime) {
+                this.addSelectListeners();
+            }
+        }
+    },
+
+    handleSelectionChange: {
+        value: function(plus, minus) {
+            console.log("Selection changed from: " + (minus[0] ? minus[0].quote : "nothing") + " -> " + (plus[0] ? plus[0].quote : "nothing"));
+        }
+    },
+
+    handleValuesRangeChange: {
+        value: function(plus, minus) {
+            console.log("Selection changed from: " + (minus[0] ? minus[0].quote : "nothing") + " -> " + (plus[0] ? plus[0].quote : "nothing"));
         }
     },
 
