@@ -132,6 +132,28 @@
             }
         },
 
+        "instructions": {
+            "prototype": "digit/ui/text.reel",
+            "properties": {
+                "element": {"#": "instructions"},
+                "value": "Text"
+            },
+            "bindings": {
+                "value": {"<-": "@owner.instructions"}
+            }
+        },
+
+        "icon": {
+            "prototype": "digit/ui/image.reel",
+            "properties": {
+                "element": {"#": "gameIcon"},
+                "enabled": true
+            },
+            "bindings": {
+                "src": {"<-": "'../../'+ @owner.iconSrc ?? '../../assets/img/blank.png'"}
+            }
+        },
+
         "nextActionEventListener": {
             "prototype": "montage/core/event/action-event-listener",
             "properties": {
@@ -380,9 +402,13 @@
             <div hidden data-montage-id="reinforcement"></div> 
         </div>
         <div data-montage-id="showTutorialCondition" class="Experiment-details">
-            Tutorial
-            <h1 data-montage-id="title"></h1>
-            <span data-montage-id="description"></span>
+            <h1><img data-montage-id="gameIcon" src="../../assets/img/blank.png"/><span data-montage-id="title"></span><small>tutorial</small></h1>
+            <i data-montage-id="description" class="Experiment-Tutorial-Description"></i>
+            <br/>
+            <div class="Experiment-Tutorial-Instructions">
+                <h3>Instructions:</h3>
+                <p data-montage-id="instructions"></p>
+            </div>
         </div>
         <div data-montage-id="showResultReportCondition" class="Experiment-results">
             <div data-montage-id="resultReport"></div>
