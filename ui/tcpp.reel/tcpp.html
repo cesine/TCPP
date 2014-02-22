@@ -19,9 +19,12 @@
                 "element": {"#": "audience"}
             },
             "bindings": {
-                "value": {"<-": "@owner.application.currentAudience.gameLabel"}
+                "value": {"<-": "@owner.application.currentAudience.gameLabel"},
+                "classList.has('montage-invisible')": {
+                    "<-": "@owner.application.currentAudience.key != 'debug'"
+                }
             }
-        },
+        },  
         "audiencesList": {
             "prototype": "oprime-montage/ui/audiences.reel",
             "properties": {
@@ -95,6 +98,11 @@
                 "element": {"#": "experimentStimuliDialects"},
                 "contentController": {"@": "experimentStimuliDialectsController"},
                 "labelPropertyName": "label"
+            },
+            "bindings": {
+                "classList.has('montage-invisible')": {
+                    "<-": "@owner.application.currentAudience.key == 'participant'"
+                }
             }
         },
 
@@ -104,7 +112,10 @@
                 "element": {"#": "experimentStimuliDialect"}
             },
             "bindings": {
-                "value": {"<-": "@experimentStimuliDialects.value.iso"}
+                "value": {"<-": "@experimentStimuliDialects.value.iso"},
+                "classList.has('montage-invisible')": {
+                    "<-": "@owner.application.currentAudience.key != 'debug'"
+                }
             }
         },
 
@@ -233,7 +244,10 @@
                 "element": {"#": "responses"}
             },
             "bindings": {
-                "contentController": {"<-": "@currentStimulus.responsesController"}
+                "contentController": {"<-": "@currentStimulus.responsesController"},
+                "classList.has('montage-invisible')": {
+                    "<-": "@owner.application.currentAudience.key != 'debug'"
+                }
             }
         },
         "resultReport": {
@@ -244,6 +258,7 @@
             "bindings": {
                 "experimentalDesign": {"<->": "@owner.experimentalDesign"},
                 "iconSrc" : {"<-": "@owner.iconSrc"}
+                
             }
         },
         "showGameCondition": {
@@ -326,6 +341,11 @@
             "properties": {
                 "element": {"#": "showResultReport"},
                 "enabled": true
+            },
+            "bindings": {
+                "classList.has('montage-invisible')": {
+                    "<-": "@owner.application.currentAudience.key == 'participant'"
+                }
             },
             "listeners": [{
                 "type": "action",

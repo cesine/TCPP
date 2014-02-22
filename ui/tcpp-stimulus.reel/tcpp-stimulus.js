@@ -47,8 +47,8 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 			this.super(stimulus);
 			this.handleAnimateVisualPrime();
 
-			this.application.debugMode = true; // TODO control with the audience select
-			if (this.application.debugMode) {
+			// this.application.debugMode = true; // TODO control with the audience select
+			if (this.application.currentAudience.key === "debug") {
 				this.handleAnimateVisualTargets();
 			} else {
 				this.application.addEventListener("animateVisualTargets", this);
