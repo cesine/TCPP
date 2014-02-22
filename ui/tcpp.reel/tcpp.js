@@ -39,7 +39,7 @@ var TCPP = exports.TCPP = Experiment.specialize( /** @lends TCPP# */ {
     transform: {
         value: function() {
 
-            x = JSON.parse(JSON.stringify(designToForceIncludeInMop))
+            var x = JSON.parse(JSON.stringify(designToForceIncludeInMop));
             for (var subexperimentIndex = 0; subexperimentIndex < x.subexperiments.length; subexperimentIndex++) {
                 var subexperiment = x.subexperiments[subexperimentIndex];
                 subexperiment.scoreSubTotal = 0;
@@ -63,7 +63,7 @@ var TCPP = exports.TCPP = Experiment.specialize( /** @lends TCPP# */ {
                     delete stimulus.targetPhonemic;
 
                     stimulus.target.imageFile = stimulus.targetImage;
-                    stimulus.target.orthographic = stimulus.targetImage.replace(".png", "").replace(/\d+_/g, "")
+                    stimulus.target.orthographic = stimulus.targetImage.replace(".png", "").replace(/\d+_/g, "");
                     delete stimulus.targetImage;
 
                     for (var distractor = 0; distractor < stimulus.distractorImages.length; distractor++) {
@@ -88,8 +88,8 @@ var TCPP = exports.TCPP = Experiment.specialize( /** @lends TCPP# */ {
 
                 }
             }
-            x.subexperiments[0].trials[0]
-            x.subexperiments[1].trials[6]
+            // x.subexperiments[0].trials[0]
+            // x.subexperiments[1].trials[6]
 
         }
     }
