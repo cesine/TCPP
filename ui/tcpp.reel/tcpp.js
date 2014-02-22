@@ -6,9 +6,9 @@ var Experiment = require("oprime-montage/ui/experiment.reel").Experiment,
     designToForceIncludeInMop = require("assets/stimuli/tcpp_design.json");
 // sampleResultToForceIncludeInMop = require("assets/stimuli/tcpp_sample_result.json");
 
-// var enLocales = require("assets/stimuli/locale/en/messages.json");
-// var frLocales = require("assets/stimuli/locale/fr/messages.json");
-// var iuLocales = require("assets/stimuli/locale/iu/messages.json");
+var enLocales = require("assets/stimuli/locale/en/messages.json");
+var frLocales = require("assets/stimuli/locale/fr/messages.json");
+var iuLocales = require("assets/stimuli/locale/iu/messages.json");
 
 
 /**
@@ -23,6 +23,9 @@ var TCPP = exports.TCPP = Experiment.specialize( /** @lends TCPP# */ {
             this.super();
             this.loadDesign(designToForceIncludeInMop);
 
+            this.contextualizer.addMessagesToContextualizedStrings(enLocales, "en");
+            this.contextualizer.addMessagesToContextualizedStrings(frLocales, "fr");
+            this.contextualizer.addMessagesToContextualizedStrings(iuLocales, "iu");
         }
     },
 

@@ -84,25 +84,22 @@
             }
         },
 
-        "experimentStimuliDialectsController": {
-            "prototype": "montage/core/range-controller",
-            "bindings": {
-                "selection": {"<->": "@owner.application.stimuliDialectsSelection"},
-                "content": {"<->": "@owner.stimuliDialects"}
-            }
-        },
-
         "experimentStimuliDialects": {
-            "prototype": "digit/ui/select.reel",
+            "prototype": "oprime-montage/ui/dialects.reel",
             "properties": {
                 "element": {"#": "experimentStimuliDialects"},
-                "contentController": {"@": "experimentStimuliDialectsController"},
-                "labelPropertyName": "label"
-            },
-            "bindings": {
-                "classList.has('montage-invisible')": {
-                    "<-": "@owner.application.currentAudience.key == 'participant'"
-                }
+                "globalKey": "currentStimuliDialect",
+                "content": [{
+                    "iso": "en",
+                    "nativeName": "English"
+                }, {
+                    "iso": "fr",
+                    "nativeName": "Français",
+                    "selected": true
+                }, {
+                    "iso": "iu",
+                    "nativeName": "ᐃᓄᒃᑎᑐᑦ"
+                }]
             }
         },
 
@@ -112,7 +109,7 @@
                 "element": {"#": "experimentStimuliDialect"}
             },
             "bindings": {
-                "value": {"<-": "@experimentStimuliDialects.value.iso"},
+                "value": {"<-": "@owner.application.currentStimuliDialect.iso"},
                 "classList.has('montage-invisible')": {
                     "<-": "@owner.application.currentAudience.key != 'debug'"
                 }
@@ -125,12 +122,6 @@
                 "element": {"#": "description"},
                 "value": "Text"
             },
-            "bindings": {
-                "value": {"<-": "@descriptionPromiseController.state"}
-            }
-        },
-        "descriptionPromiseController": {
-            "prototype": "montage/core/promise-controller",
             "bindings": {
                 "value": {"<-": "@owner.description"}
             }
@@ -358,12 +349,6 @@
             "properties": {
                 "element": {"#": "title"}
             },
-            "bindings": {
-                "value": {"<-": "@titlePromiseController.state"}
-            }
-        },
-        "titlePromiseController": {
-            "prototype": "montage/core/promise-controller",
             "bindings": {
                 "value": {"<-": "@owner.title"}
             }
