@@ -26,6 +26,13 @@ var TCPP = exports.TCPP = Experiment.specialize( /** @lends TCPP# */ {
             this.contextualizer.addMessagesToContextualizedStrings(enLocales, "en");
             this.contextualizer.addMessagesToContextualizedStrings(frLocales, "fr");
             this.contextualizer.addMessagesToContextualizedStrings(iuLocales, "iu");
+
+            this.application.currentStimuliDialect = {
+                "iso": "fr",
+                "name": "French",
+                "nativeName": "français"
+            };
+            this.contextualizer.currentLocale = this.application.currentStimuliDialect.iso;
         }
     },
 

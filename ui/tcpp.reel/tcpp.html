@@ -113,7 +113,12 @@
                 "classList.has('montage-invisible')": {
                     "<-": "@owner.application.currentAudience.key != 'debug'"
                 }
-            }
+            },
+            "listeners": [{
+                "type": "change",
+                "useCapture": false,
+                "listener": {"@": "owner"}
+            }]
         },
 
         "description": {
@@ -123,9 +128,10 @@
                 "value": "Text"
             },
             "bindings": {
-                "value": {"<-": "@owner.description"}
+                "value": {"<-": "@owner.getTextFor('description', @audience, @experimentStimuliDialect)"}
             }
         },
+
         "nextActionEventListener": {
             "prototype": "montage/core/event/action-event-listener",
             "properties": {
