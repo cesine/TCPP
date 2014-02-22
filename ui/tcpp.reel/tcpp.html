@@ -14,9 +14,18 @@
         },
 
         "audience": {
-            "prototype": "oprime-montage/ui/audiences.reel",
+            "prototype": "montage/ui/text.reel",
             "properties": {
                 "element": {"#": "audience"}
+            },
+            "bindings": {
+                "value": {"<-": "@owner.application.currentAudience.gameLabel"}
+            }
+        },
+        "audiencesList": {
+            "prototype": "oprime-montage/ui/audiences.reel",
+            "properties": {
+                "element": {"#": "audiencesList"}
             }
         },
 
@@ -366,7 +375,6 @@
         </div>
         <div data-montage-id="showResultReportCondition" class="Experiment-results">
             <div data-montage-id="resultReport"></div>
-            <span data-montage-id="audience"></span>
         </div>
         <div data-montage-id="confirmDialogOverlay"> </div>
         <footer>
@@ -385,6 +393,8 @@
             <span data-montage-id="chooseLanguage">
                 Stimuli:
             </span>
+            <span data-montage-id="audiencesList"></span>
+            <span data-montage-id="audience"></span>
             <div data-montage-id="responses" class="Experiment-responses-display">
                 <span data-montage-id="response" class="Experiment-response-debug"></span>
             </div>
