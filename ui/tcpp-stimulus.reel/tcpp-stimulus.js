@@ -17,7 +17,7 @@ var TCPPStimulus = exports.TCPPStimulus = AbstractStimulus.specialize( /** @lend
 	constructor: {
 		value: function TCPPStimulus() {
 			this.super();
-			this.confirmResponseChoiceMessage = this.application.contextualizer.localize("confirm_choice");
+			this.confirmResponseChoiceMessage = "confirm_choice";
 		}
 	},
 
