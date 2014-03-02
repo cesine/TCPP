@@ -21,14 +21,13 @@
                 "src": {"<-": "@owner.primeImage ?? '../../node_modules/oprime-montage/assets/img/blank.png'"}
             }
         },
-        "reinforcementImage": {
-            "prototype": "digit/ui/image.reel",
+        "reinforcement": {
+            "prototype": "oprime-montage/ui/reinforcement.reel/reinforcement-counter.reel",
             "properties": {
-                "element": {"#": "reinforcementImage"},
-                "crossOrigin": null
+                "element": {"#": "reinforcement"}
             },
             "bindings": {
-                "src": {"<-": "@owner.currentReinforcementImageSrc ?? '../../node_modules/oprime-montage/assets/img/blank.png'"}
+                "content": {"<->": "@owner.ownerComponent.reinforcementCounter"}
             }
         }, 
         "showVisualTargetCondition": {
@@ -95,20 +94,9 @@
             <img data-montage-id="visualPrime" class="Stimulus-prime-image" src="../../node_modules/oprime-montage/assets/img/blank.png">
         </div>
 
-        <div class="Stimulus-content-right" >
-            <img src="../../assets/stimuli/image/TCPPreinforcementcartoon_01_BEFORE.png"/> 
-            <img src="../../assets/stimuli/image/TCPPreinforcementcartoon_01_BEFORE.png"/> 
-            <img src="../../assets/stimuli/image/TCPPreinforcementcartoon_01_BEFORE.png"/> 
-            <img src="../../assets/stimuli/image/TCPPreinforcementcartoon_01_BEFORE.png"/> 
-            <img src="../../assets/stimuli/image/TCPPreinforcementcartoon_01_BEFORE.png"/> 
-            <img src="../../assets/stimuli/image/TCPPreinforcementcartoon_01_BEFORE.png"/> 
-            <img src="../../assets/stimuli/image/TCPPreinforcementcartoon_01_BEFORE.png"/> 
-            <img src="../../assets/stimuli/image/TCPPreinforcementcartoon_01_BEFORE.png"/> 
-            <img src="../../assets/stimuli/image/TCPPreinforcementcartoon_01_BEFORE.png"/> 
-            <img src="../../assets/stimuli/image/TCPPreinforcementcartoon_01_BEFORE.png"/> 
+        <div  data-montage-id="reinforcement" class="Stimulus-content-right" >
         </div>
-        <img hidden data-montage-id="reinforcementImage" src="../../assets/stimuli/image/TCPPreinforcementcartoon_01_BEFORE.png"/> 
-        
+
         <div class="Stimulus-content-left">
             <div data-montage-id="showVisualTargetCondition"  class="Stimulus-choose-area Stimulus-touchable">
                 <img data-montage-id="visualChoiceA" class="Stimulus-choose-image Stimulus-record-touch-response" src="../../node_modules/oprime-montage/assets/img/blank.png">

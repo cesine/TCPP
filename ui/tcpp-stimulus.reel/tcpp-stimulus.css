@@ -24,15 +24,15 @@
 }
 
 .Stimulus-content-right {
-	width: 19%;
+	width: 15%;
 	float: right;
 }
 
-.Stimulus-content-right img{
+/*.Stimulus-content-right img{
 	width: 49%;
 	float: right;
 	text-align: center;
-}
+}*/
 .Stimulus-choose-area {
 	/*background-color: #FFFFCC;*/
 }

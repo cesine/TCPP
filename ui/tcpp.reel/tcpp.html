@@ -212,16 +212,14 @@
         },
 
         "reinforcement": {
-            "prototype": "oprime-montage/ui/reinforcement.reel",
+            "prototype": "oprime-montage/ui/reinforcement.reel/reinforcement-counter.reel",
             "properties": {
                 "element": {"#": "reinforcement"}
             },
             "bindings": {
-                "images": {"<-": "@owner._currentTestBlock.reinforcementImages.counter"},
-                "firstImageSrc": {"<-": "@owner._currentTestBlock.reinforcementImages.firstImageSrc"},
-                "lastImageSrc": {"<-": "@owner._currentTestBlock.reinforcementImages.lastImageSrc"}
+                "content": {"<->": "@owner.reinforcementCounter"}
             }
-        }, 
+        },
 
         "response": {
             "prototype": "oprime-montage/ui/response.reel",
