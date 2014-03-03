@@ -260,7 +260,7 @@
             "properties": {
                 "element": {"#": "resumeExperiment"},
                 "enabled": true,
-                "label": "Resume",
+                "label": "Continue",
                 "src": ""
             },
             "listeners": [{
@@ -389,8 +389,8 @@
             },
             "bindings": {
                 "experimentalDesign": {"<->": "@owner.experimentalDesign"},
-                "iconSrc" : {"<-": "@owner.iconSrc"}
-                
+                "description": {"<-": "@owner.description"},
+                "title": {"<-": "@owner.title"}
             }
         },
         "tutorial": {
@@ -466,7 +466,10 @@
                 "removalStrategy": "hide"
             },
             "bindings": {
-                "condition": {"<-": "@owner.resultsReportMode"}
+                "condition": {"<-": "@owner.resultsReportMode"},
+                "classList.has('bluebody')": {
+                    "<-": "@owner.resultsReportMode"
+                }
             }
         },
         "showResultReportActionEventListener": {
