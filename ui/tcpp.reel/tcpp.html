@@ -276,7 +276,8 @@
                 "element": {"#": "reinforcement"}
             },
             "bindings": {
-                "content": {"<->": "@owner.reinforcementCounter"}
+                "counter": {"<->": "@owner.reinforcementCounter"},
+                "currentItem": {"<-": "@owner._currentStimulusIndex"}
             }
         },
 

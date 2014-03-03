@@ -28,7 +28,8 @@
                 "doubleColumn": true
             },
             "bindings": {
-                "content": {"<->": "@owner.ownerComponent.reinforcementCounter"}
+                "counter": {"<->": "@owner.ownerComponent.templateObjects.reinforcement.counter"},
+                "currentItem": {"<-": "@owner.ownerComponent.templateObjects.reinforcement.currentItem"}
             }
         }, 
         "showVisualTargetCondition": {
