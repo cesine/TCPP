@@ -23,6 +23,9 @@ var TCPP = exports.TCPP = Experiment.specialize( /** @lends TCPP# */ {
             this.super();
             this.loadDesign(designToForceIncludeInMop);
 
+            this.canReplayStimuli = true;
+            this.canPauseStimuli = true;
+
             this.contextualizer.addMessagesToContextualizedStrings(enLocales, "en");
             this.contextualizer.addMessagesToContextualizedStrings(frLocales, "fr");
             this.contextualizer.addMessagesToContextualizedStrings(iuLocales, "iu");
